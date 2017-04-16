@@ -60,15 +60,16 @@ public class certain {
                     }
                 }
                 //****************灰度图做滤波****************//
-                //int[][] grayfilter = new int[height][width];
-                //grayfilter=ImageFilter.MedianFilter(gray);
-                //grayfilter=ImageFilter.AverageFilter(gray);
-                /*for(int i=0;i<50;i++){
-                    for(int j=0;j<width;j++){
-						System.out.print(gray[i][j]+",");
-					}
-					System.out.println(" ");
-				}*/
+//                int[][] grayfilter = new int[height][width];
+//                grayfilter= ImageFilter.MedianFilter(gray);
+//                grayfilter=ImageFilter.AverageFilter(gray);
+//                for(int i=0;i<50;i++){
+//                    for(int j=0;j<width;j++){
+//						System.out.print(gray[i][j]+",");
+//					}
+//					System.out.println(" ");
+//				}
+
                 //********找出图中第一个圆圈的中心点，记为（x0,y0）
                 int x0 = 0, y0 = 0, x1 = 0, x2 = 0, y1 = 0, y2 = 0;
                 int XX = 0;
@@ -102,7 +103,8 @@ public class certain {
                 x0 = x1;
                 y0 = (y1 + y2) / 2;
                 //****从第一个中心点出发，分别向下查找第一行圆的中心横线的Y,记录个数num1
-                int[] Yver = new int[4];
+                //控制数组最大行列
+                int[] Yver = new int[10];
                 int y = 0;
                 int num1 = 0;
                 for (int j = 2; j < height - 5; j++) {
@@ -137,7 +139,7 @@ public class certain {
      * @param num1 每行图案的个数
      * @return 返回该行的图案的编码
      */
-    public static int[] JUdgeResult(int gray[][], int y0, int num1) {
+    private static int[] JUdgeResult(int gray[][], int y0, int num1) {
         int[] code = new int[num1];
         int num2 = 0;
         for (int i = 2; i < width - 2; i++) {
@@ -177,11 +179,8 @@ public class certain {
 
     /**
      * 将计算的结果编码写入表格
-     *
-     * @param
-     * @param Picturename
      */
-    public static void ResultExcel(int code[][], String Picturename) {
+    private static void ResultExcel(int code[][], String Picturename) {
         int len = code.length;
         try {
             //打开一个写文件器，构造函数中的第二个参数true表示以追加形式写文件
