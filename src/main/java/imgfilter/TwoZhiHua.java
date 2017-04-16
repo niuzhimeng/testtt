@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class TwoZhiHua {
     public static void main(String[] args) throws IOException {
-        BufferedImage bi = ImageIO.read(new File("D:/test/nzm.jpg"));//通过imageio将图像载入
+        BufferedImage bi = ImageIO.read(new File("D:/test/nzm.png"));//通过imageio将图像载入
         int h = bi.getHeight();//获取图像的高
         int w = bi.getWidth();//获取图像的宽
         int rgb = bi.getRGB(0, 0);//获取指定坐标的ARGB的像素值
