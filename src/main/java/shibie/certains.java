@@ -5,6 +5,8 @@ package shibie;
  * Created by me on 2017/4/16.
  */
 
+import org.junit.Test;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
@@ -22,7 +24,8 @@ public class certains {
 
     private static BufferedWriter writer = null;
 
-    public static void main(String[] args) throws IOException {
+    @Test
+    public void test1() throws IOException {
         int progress = 0;//进度条，每进行一次进度条加1
         //打开文本文件testimage，若不存在，创建新的，写入编码
         File excelIn = new File("E:" + "\\" + "code.txt");//编码文件存在E盘code
@@ -316,7 +319,7 @@ public class certains {
             }
             writer.write("\r\n");
             /*for(int i=0;i<h;i++){
-				for(int j=0;j<w;j++){
+                for(int j=0;j<w;j++){
 					writer.write("\t"+code[i][j]);
 				}
 				writer.write("\r\n");

@@ -59,23 +59,13 @@ public class certain {
 
                     }
                 }
-                //****************灰度图做滤波****************//
-//                int[][] grayfilter = new int[height][width];
-//                grayfilter= ImageFilter.MedianFilter(gray);
-//                grayfilter=ImageFilter.AverageFilter(gray);
-//                for(int i=0;i<50;i++){
-//                    for(int j=0;j<width;j++){
-//						System.out.print(gray[i][j]+",");
-//					}
-//					System.out.println(" ");
-//				}
 
-                //********找出图中第一个圆圈的中心点，记为（x0,y0）
-                int x0 = 0, y0 = 0, x1 = 0, x2 = 0, y1 = 0, y2 = 0;
-                int XX = 0;
+                //********找出图中第一个圆圈的中心点A，记为（x0,y0）
+                int x0, x1 = 0;
+                int XX;
                 XX = (width / 4 + width / 3) / 2;
-                for (int j = 2; j < height - 5; j++) {//找出第一个圆的中心点x0,y0
-                    for (int i = 2; i < XX - 5; i++) {
+                for (int j = 2; j < height; j++) {//找出第一个圆的中心点x0,y0
+                    for (int i = 2; i < XX; i++) {
                         if (gray[j - 2][i] > 200 && gray[j - 1][i] > 200 && gray[j][i] < 50) {
                             int nn = 0;//顶点处是否有多个点，并选择最中间的点
                             for (int n = i; n < width; n++) {
@@ -86,10 +76,8 @@ public class certain {
                                 }
                             }
                             x1 = i + nn / 2;
-                            y1 = j;//找到上顶点(x1,y1)
                             for (int m = j; m < height - 2; m++) {//从上顶点向下查找
                                 if (gray[m][i] < 50 && gray[m + 1][i] > 200 && gray[m + 2][i] > 200) {
-                                    y2 = m;//下边界，也就是B点的坐标
                                     break;
                                 }
                             }
@@ -101,11 +89,9 @@ public class certain {
                     }
                 }
                 x0 = x1;
-                y0 = (y1 + y2) / 2;
                 //****从第一个中心点出发，分别向下查找第一行圆的中心横线的Y,记录个数num1
                 //控制数组最大行列
                 int[] Yver = new int[10];
-                int y = 0;
                 int num1 = 0;
                 for (int j = 2; j < height - 5; j++) {
                     if (gray[j - 2][x0] > 200 && gray[j - 1][x0] > 200 && gray[j][x0] < 50) {//找到上边界
@@ -147,7 +133,7 @@ public class certain {
 
                 for (int ii = i + 5; ii < width - 2; ii++) {//依次往右找右边界
                     if (gray[y0][ii] < 50 && gray[y0][ii + 1] > 200 && gray[y0][ii + 2] > 200) {//找到右侧边缘
-                        int x0 = 0, sum = 0;
+                        int x0, sum;
                         x0 = (i + ii) / 2;
                         sum = gray[y0 - 1][x0] + gray[y0][x0 - 1] + gray[y0][x0] + gray[y0 + 1][x0] + gray[y0][x0 + 1];
                         if (sum < 200) {
